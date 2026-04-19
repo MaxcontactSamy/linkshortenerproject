@@ -50,10 +50,10 @@ export default async function HomePage() {
           campaigns and content.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <SignUpButton mode="modal">
+          <SignUpButton mode="modal" forceRedirectUrl="/dashboard">
             <Button size="lg">Get started for free</Button>
           </SignUpButton>
-          <SignInButton mode="modal">
+          <SignInButton mode="modal" forceRedirectUrl="/dashboard">
             <Button size="lg" variant="outline">
               Sign in
             </Button>
