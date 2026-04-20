@@ -1,7 +1,9 @@
 # UI Components
+
 ---
-description: Read this file before implementing or modifying any UI components in the project.
----
+
+## description: Read this file before implementing or modifying any UI components in the project.
+
 ## Rules
 
 - ALL UI elements must use **shadcn/ui** components. Never create custom components from scratch.
@@ -30,8 +32,8 @@ Components are scaffolded into `components/ui/` and are part of the codebase —
 ## Usage Example
 
 ```tsx
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 export default function MyForm() {
   return (

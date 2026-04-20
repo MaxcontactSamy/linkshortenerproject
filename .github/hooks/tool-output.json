@@ -1,0 +1,12 @@
+{
+    "version": 1,
+    "hooks": {
+        "postToolUse": [
+            {
+                "type": "command",
+                "bash": "mkdir -p tmp && cat > tmp/$(date -u +%Y%m%dT%H%M%S%3N).json",
+                "powershell": "$null = New-Item -ItemType Directory -Force -Path tmp; $input | Set-Content -Path \"tmp/$((Get-Date).ToUniversalTime().ToString('yyyyMMddTHHmmssfff')).json\""
+            }
+        ]
+    }
+}

@@ -1,7 +1,9 @@
 # Authentication
+
 ---
-description: Read this file before implementing any authentication in the project.
----
+
+## description: Read this file before implementing any authentication in the project.
+
 ## Rules
 
 - ALL authentication is handled exclusively by **Clerk** (`@clerk/nextjs` v7). Never introduce any other auth library, custom session handling, or JWT implementation.
@@ -16,9 +18,9 @@ description: Read this file before implementing any authentication in the projec
 
 ```ts
 // middleware.ts
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-const isProtectedRoute = createRouteMatcher(['/dashboard(.*)']);
+const isProtectedRoute = createRouteMatcher(["/dashboard(.*)"]);
 
 export default clerkMiddleware(async (auth, req) => {
   if (isProtectedRoute(req)) {
@@ -28,8 +30,8 @@ export default clerkMiddleware(async (auth, req) => {
 
 export const config = {
   matcher: [
-    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
-    '/(api|trpc)(.*)',
+    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
+    "/(api|trpc)(.*)",
   ],
 };
 ```
@@ -42,22 +44,18 @@ If a signed-in user visits `/`, redirect them to `/dashboard` **server-side** in
 
 ```tsx
 // app/page.tsx
-import { auth } from '@clerk/nextjs/server';
-import { redirect } from 'next/navigation';
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
 export default async function HomePage() {
   const { userId } = await auth();
 
   if (userId) {
-    redirect('/dashboard');
+    redirect("/dashboard");
   }
 
   // render landing page for signed-out users
-  return (
-    <main>
-      {/* landing page content */}
-    </main>
-  );
+  return <main>{/* landing page content */}</main>;
 }
 ```
 
@@ -77,8 +75,8 @@ import {
   SignInButton,
   SignUpButton,
   UserButton,
-} from '@clerk/nextjs';
-import { Button } from '@/components/ui/button';
+} from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
 
 export function Header() {
   return (
@@ -103,10 +101,10 @@ export function Header() {
 
 ## Summary of Constraints
 
-| Requirement | Correct approach |
-|---|---|
-| Protect `/dashboard` | `clerkMiddleware` + `createRouteMatcher` in `middleware.ts` |
-| Redirect signed-in users from `/` | `auth()` server-side in `app/page.tsx` |
-| Sign-in / sign-up UI | `<SignInButton mode="modal">` / `<SignUpButton mode="modal">` |
-| Separate auth pages | **Never** — do not create `app/(auth)/sign-in` or `app/(auth)/sign-up` |
-| Other auth libraries | **Never** — Clerk only |
+| Requirement                       | Correct approach                                                       |
+| --------------------------------- | ---------------------------------------------------------------------- |
+| Protect `/dashboard`              | `clerkMiddleware` + `createRouteMatcher` in `middleware.ts`            |
+| Redirect signed-in users from `/` | `auth()` server-side in `app/page.tsx`                                 |
+| Sign-in / sign-up UI              | `<SignInButton mode="modal">` / `<SignUpButton mode="modal">`          |
+| Separate auth pages               | **Never** — do not create `app/(auth)/sign-in` or `app/(auth)/sign-up` |
+| Other auth libraries              | **Never** — Clerk only                                                 |

@@ -1,9 +1,6 @@
-import {
-  SignInButton,
-  SignUpButton,
-} from "@clerk/nextjs";
+import { SignInButton, SignUpButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
-import { BarChart3, Link2, ShieldCheck } from "lucide-react";
+import { Link2, ShieldCheck } from "lucide-react";
 import { redirect } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
@@ -11,8 +8,7 @@ import { Button } from "@/components/ui/button";
 const features = [
   {
     title: "Fast URL shortening",
-    description:
-      "Create clean short links in seconds and share them anywhere.",
+    description: "Create clean short links in seconds and share them anywhere.",
     icon: Link2,
   },
   {
@@ -20,12 +16,6 @@ const features = [
     description:
       "Built-in Clerk authentication keeps your links and account protected.",
     icon: ShieldCheck,
-  },
-  {
-    title: "Performance insights",
-    description:
-      "Track engagement and understand which links bring the most traffic.",
-    icon: BarChart3,
   },
 ] as const;
 
@@ -43,11 +33,11 @@ export default async function HomePage() {
           Link Shortener
         </p>
         <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
-          Shorten links, share instantly, and grow with confidence
+          Shorten links and share them instantly
         </h1>
         <p className="text-lg text-muted-foreground">
-          A simple platform to create, manage, and track short links for your
-          campaigns and content.
+          A simple platform to create and manage short links for your campaigns
+          and content.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3">
           <SignUpButton mode="modal" forceRedirectUrl="/dashboard">
